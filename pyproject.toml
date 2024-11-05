@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "botpy"
+version = "0.1.0"
+description = ""
+authors = ["yzhh <31803608+OasisAkari@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pre-commit = "^4.0.1"
+pyyaml = "^6.0.2"
+aiohttp = "^3.10.10"
+apscheduler = "^3.10.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
