@@ -1514,7 +1514,7 @@ class BotAPI:
         self,
         openid: str,
         file_type: int,
-        url: str,
+        url: str=None,
         srv_send_msg: bool = False,
         file_data: str = None,
     ) -> message.Media:
