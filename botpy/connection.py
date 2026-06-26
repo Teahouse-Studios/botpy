@@ -140,7 +140,7 @@ class ConnectionState:
         self._dispatch("message_create", _message)
 
     def parse_group_message_create(self, payload):
-        _message = Message(self.api, payload.get('id', None), payload.get('d', {}))
+        _message = GroupMessage(self.api, payload.get('id', None), payload.get('d', {}))
         self._dispatch("message_group_create", _message)
 
     def parse_message_delete(self, payload):
