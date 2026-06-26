@@ -5,7 +5,7 @@ from typing import List, Callable, Dict, Any, Optional
 from .channel import Channel
 from .guild import Guild
 from .interaction import Interaction
-from .manage import C2CManageEvent, GroupManageEvent
+from .manage import C2CManageEvent, GroupManageEvent, GroupMemberEvent
 from .message import C2CMessage, GroupMessage, Message, DirectMessage, MessageAudit
 from .user import Member
 from .reaction import Reaction
@@ -139,6 +139,10 @@ class ConnectionState:
         _message = Message(self.api, payload.get('id', None), payload.get('d', {}))
         self._dispatch("message_create", _message)
 
+    def parse_group_message_create(self, payload):
+        _message = Message(self.api, payload.get('id', None), payload.get('d', {}))
+        self._dispatch("message_group_create", _message)
+
     def parse_message_delete(self, payload):
         _message = Message(self.api, payload.get('id', None), payload.get('d', {}))
         self._dispatch("message_delete", _message)
@@ -209,6 +213,15 @@ class ConnectionState:
     def parse_c2c_message_create(self, payload):
         _message = C2CMessage(self.api, payload.get("id", None), payload.get("d", {}))
         self._dispatch("c2c_message_create", _message)
+
+
+    def parse_group_member_add(self, payload):
+        _event = GroupMemberEvent(self.api, payload.get("id", None), payload.get("d", {}))
+        self._dispatch("message_group_member_add", _event)
+
+    def parse_group_member_remove(self, payload):
+        _event = GroupMemberEvent(self.api, payload.get("id", None), payload.get("d", {}))
+        self._dispatch("message_group_member_remove", _event)
 
     def parse_group_add_robot(self, payload):
         _event = GroupManageEvent(self.api, payload.get("id", None), payload.get("d", {}))
